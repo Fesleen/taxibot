@@ -1,0 +1,139 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0px;
+}
+
+.Box {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.Box__item {
+    width: 24%;
+    display: block;
+}
+
+.label {
+    display: block;
+    color: rgb(255, 255, 255);
+    font-size: 22px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.select {
+    font-size: 22px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+    width: 100%;
+  }
+  
+  option {
+    background-color: #000a25;
+    color: #ffffff;
+  }
+  
+  .error_text {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+  }
+  .Buttons{
+    padding: 20px;
+  }
+  .Back_button {
+    background-color: #292929; 
+    color: #ffffff;
+    border-radius: 4px; 
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500; 
+    margin-right: 20px;
+}
+
+.Back_button:hover {
+    background-color: #1f1f1f; 
+}
+.Next_button {
+    background-color: #008d88; 
+    color: #ffffff; 
+    border-radius: 4px; 
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500; 
+}
+.Next_button:hover {
+    background-color: #007d79;
+}
+@media (max-width: 768px) {
+    .Box {
+        gap: 10px;
+    }
+
+    .Box__item {
+        width: 48%;
+    }
+
+    .label {
+        font-size: 18px;
+    }
+
+    select {
+        font-size: 18px;
+        padding: 8px;
+    }
+    .Buttons{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .Box {
+        gap: 5px;
+    }
+
+    .Box__item {
+        width: 100%;
+    }
+
+    .label {
+        font-size: 16px;
+    }
+
+    select {
+        font-size: 16px;
+        padding: 6px;
+    }
+    .Back_button {
+        font-size: 14px; 
+        padding: 8px 16px; 
+    }
+    .Next_button {
+        font-size: 14px; 
+        padding: 8px 16px; 
+    }
+}
+
+
+
+
