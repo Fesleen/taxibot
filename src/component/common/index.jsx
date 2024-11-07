@@ -14,7 +14,7 @@ const CommonComponent = () => {
   };
 
   const getColor = (path) => {
-    return location.pathname === path ? '#ffffff' : '#b0b0b0'; // Aktif page uchun rang
+    return location.pathname === path ? '#ffffff' : '#b0b0b0'; 
   };
 
   return (
