@@ -22,7 +22,7 @@ function InformationComponent() {
       axios.post('API/information', formData)
         .then(() => {
           alert("Ma'lumotlar yuborildi!");
-          navigate('/dashboard');
+          navigate('/');
         })
         .catch(() => alert("Xato yuz berdi."));
     } else {

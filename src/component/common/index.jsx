@@ -24,7 +24,7 @@ const CommonComponent = () => {
         <div className={styles.Box__card}>
           <div
             className={styles.Box__card__item}
-            onClick={() => handleNavigate('/')}
+            onClick={() => handleNavigate('/adress')}
           >
             <LocationOnIcon sx={{ color: getColor('/') }} />
             <p className={styles.box__p} style={{ color: getColor('/') }}>Manzil</p>

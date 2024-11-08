@@ -8,52 +8,27 @@ function LoginComponent() {
     phone: '',
     password: ''
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
-  // Update form data state based on input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    // Allow only numeric input for phone and password
-    if (name === "phone" || name === "password") {
-      // Make sure the value is numeric
-      if (/^\d*$/.test(value)) {
-        setFormData({ ...formData, [name]: value });
-      }
-    }
-  };
-
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
 
-    // Check if both fields are filled
-    if (formData.phone && formData.password) {
-      try {
-        const response = await fetch('YOUR_API_ENDPOINT_HERE', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            phone: formData.phone,
-            password: formData.password
-          }),
-        });
+    try {
+      const response = await fetch('YOUR_API_ENDPOINT_HERE', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phone: formData.phone,
+          password: formData.password
+        }),
+      });
 
-        const data = await response.json();
-
-        if (response.ok) {
-          // API call succeeded, navigate to dashboard
-          navigate('/dashboard');
-        } else {
-          // Handle login error (wrong credentials, etc.)
-          alert(data.message || 'Login failed');
-        }
-      } catch (error) {
-        // Handle network/API errors
-        alert('An error occurred. Please try again later.');
-      }
-    } else {
-      alert("Iltimos, barcha maydonlarni to'ldiring");
+      navigate('/adress');
+    } catch (error) {
+      setErrorMessage('An error occurred. Please try again later.');
     }
   };
 
@@ -63,32 +38,34 @@ function LoginComponent() {
         <div className={styles.card}>
           <h2 className={styles.title}>Assalomu alaykum, sizni qayta ko'rganimizdan xursandmiz!</h2>
         </div>
-        
+
         <div className={styles.inputGroup}>
           <label className={styles.label}>Telefon raqamingiz</label>
           <input
-            type="text"  // Use text input and handle numeric validation manually
+            type="number"
             name="phone"
             placeholder="998"
             className={styles.input}
             value={formData.phone}
-            onChange={handleChange}
-            maxLength={13} // Ensure the phone number does not exceed 13 digits
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            maxLength={13}
           />
         </div>
 
         <div className={styles.inputGroup}>
           <label className={styles.label}>Parolingiz</label>
           <input
-            type="password" // Use password type for password field
+            type="number"
             name="password"
             placeholder="Parolingizni kiriting"
             className={styles.input}
             value={formData.password}
-            onChange={handleChange}
-            maxLength={6} // If password is numeric, limit to a certain length
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            maxLength={6}
           />
         </div>
+
+        {errorMessage && <div className={styles.error}>{errorMessage}</div>}
 
         <div className={styles.box}>
           <span className={styles.span}>Akkauntingiz yo'qmi?</span>

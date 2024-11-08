@@ -42,15 +42,15 @@
 }
 
 .input {
+  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
   padding: 10px;
-  font-size: 16px;
   border-radius: 5px;
   border: 1px solid #fff;
-  font-family: "Roboto", sans-serif;
   background-color: transparent;
   color: #fff;
-  outline: none; 
-  box-sizing: border-box; 
+  margin-bottom: 25px;
 }
 
 .input:focus {
@@ -146,7 +146,8 @@
   }
 
   .input {
-    font-size: 12px;
+    width: 100%;
+    font-size: 16px;
     padding: 6px;
   }
 

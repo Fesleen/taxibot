@@ -1,118 +1,90 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import styles from './style.module.css';
 
-function SignComponent() {
+function LoginComponent() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
-    surname: '',
     phone: '',
-    passportSeries: '',
-    driverLicenseSeries: '',
+    password: ''
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Check if all fields are filled
-    const { name, surname, phone, passportSeries, driverLicenseSeries } = formData;
-    if (!name || !surname || !phone || !passportSeries || !driverLicenseSeries) {
-      alert('Iltimos, barcha maydonlarni to‘ldiring.');
-      return;
+    setErrorMessage('');
+
+    if (!formData.phone || !formData.password) {
+      alert('Iltimos, barcha maydonlarni to\'ldiring');
+      return; 
     }
 
     try {
-      const response = await axios.post('/api/register', formData);
-      if (response.status === 200) {
-        navigate('/dashboard');
-      }
+      const response = await fetch('YOUR_API_ENDPOINT_HERE', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phone: formData.phone,
+          password: formData.password
+        }),
+      });
+      if (response.ok) {
+        console.log('Login successful');
+      } 
     } catch (error) {
-      console.error("Ro'yxatdan o'tishda xatolik:", error);
-      alert("Ro'yxatdan o'tishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.");
+      setErrorMessage('An error occurred. Please try again later.');
     }
+    navigate('/address');
   };
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h2 className={styles.title}>Ro'yxatdan o'tish</h2>
-        <div className={styles.box}>
-          <span className={styles.span}>Akkauntingiz bormi?</span>
-          <span className={styles.link} onClick={() => navigate('/login')}>
-           Kirish
-          </span>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.card}>
+          <h2 className={styles.title}>Assalomu alaykum, sizni qayta ko'rganimizdan xursandmiz!</h2>
         </div>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Ismingiz</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Ismingizni kiriting"
-            className={styles.input}
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </div>
-        
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Familiyangiz</label>
-          <input
-            type="text"
-            name="surname"
-            placeholder="Familiyangizni kiriting"
-            className={styles.input}
-            value={formData.surname}
-            onChange={handleChange}
-          />
-        </div>
-        
+
         <div className={styles.inputGroup}>
           <label className={styles.label}>Telefon raqamingiz</label>
           <input
-            type="text"
+            type="number"
             name="phone"
-            placeholder="998XXYYYYYYY"
+            placeholder="998"
             className={styles.input}
             value={formData.phone}
-            onChange={handleChange}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            maxLength={13}
           />
         </div>
-        
+
         <div className={styles.inputGroup}>
-          <label className={styles.label}>Pasportingizni yuklang</label>
+          <label className={styles.label}>Parolingiz</label>
           <input
-            type="text"
-            name="passportSeries"
-            placeholder="Pasport seriyasini kiriting"
+            type="number"
+            name="password"
+            placeholder="Parolingizni kiriting"
             className={styles.input}
-            value={formData.passportSeries}
-            onChange={handleChange}
+            value={formData.password}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            maxLength={6}
           />
         </div>
-        
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Haydovchilik guvohnomasini yuklang</label>
-          <input
-            type="text"
-            name="driverLicenseSeries"
-            placeholder="Guvohnoma seriyasini kiriting"
-            className={styles.input}
-            value={formData.driverLicenseSeries}
-            onChange={handleChange}
-          />
+
+        {errorMessage && <div className={styles.error}>{errorMessage}</div>}
+
+        <div className={styles.box}>
+          <span className={styles.span}>Akkauntingiz yo'qmi?</span>
+          <span className={styles.link} onClick={() => navigate('/sign')}>
+            Bu yerdan oching
+          </span>
         </div>
-        
-        <button type="submit" className={styles.submitButton}>Ro'yxatdan o'tish</button>
+
+        <button type="submit" className={styles.submitButton}>Kirish</button>
       </form>
     </div>
   );
 }
 
-export default SignComponent;
+export default LoginComponent;

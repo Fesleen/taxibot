@@ -9,10 +9,10 @@ import SignPage from "../pages/sign";
 function RouterComponent() {
   return (
     <Routes>
-      <Route path="/" element={<AddressPage />} />
+      <Route path="/adress" element={<AddressPage />} />
       <Route path="/information" element={<InformationPage />} />
       <Route path="/price" element={<PricePage />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<LoginPage />} />
       <Route path="/sign" element={<SignPage />} />
     </Routes>
   );

@@ -37,14 +37,16 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.input, .select {
+.input , select {
+  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
   padding: 10px;
-  font-size: 16px;
   border-radius: 5px;
   border: 1px solid #fff;
   background-color: transparent;
   color: #fff;
-  font-family: "Roboto", sans-serif;
+  margin-bottom: 25px;
 }
 
 .errorText {
@@ -85,8 +87,9 @@ body {
     padding: 10px;
   }
 
-  .input, .select {
-    font-size: 12px;
+  .input , select {
+    width: 100%;
+    font-size: 16px;
     padding: 6px;
   }
 
