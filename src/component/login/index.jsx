@@ -14,6 +14,11 @@ function LoginComponent() {
     e.preventDefault();
     setErrorMessage('');
 
+    if (!formData.phone || !formData.password) {
+      alert('Iltimos, barcha maydonlarni to\'ldiring');
+      return;
+    }
+
     try {
       const response = await fetch('YOUR_API_ENDPOINT_HERE', {
         method: 'POST',
@@ -25,8 +30,9 @@ function LoginComponent() {
           password: formData.password
         }),
       });
+
       if (response.ok) {
-        navigate('/adress');
+        navigate('/address');
       } else {
         setErrorMessage('Invalid credentials. Please try again.');
       }
