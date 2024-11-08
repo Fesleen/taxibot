@@ -13,13 +13,14 @@ function LoginComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
+
     if (!formData.phone || !formData.password) {
       alert('Iltimos, barcha maydonlarni to\'ldiring');
       return;
     }
 
     try {
-      const response = await fetch('YOUR_API_ENDPOINT_HERE', {
+      await fetch('YOUR_API_ENDPOINT_HERE', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,11 +30,7 @@ function LoginComponent() {
           password: formData.password
         }),
       });
-      if (response.ok) {
-        navigate('/adress');
-      } else {
-        setErrorMessage('Noto‘g‘ri telefon raqami yoki parol. Iltimos, qayta urinib ko‘ring.');
-      }
+      navigate('/adress');
     } catch (error) {
       setErrorMessage('Xato yuz berdi. Iltimos, keyinroq urinib ko‘ring.');
     }
