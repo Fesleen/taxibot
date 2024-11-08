@@ -1,44 +1,49 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import styles from './style.module.css';
 
 function LoginComponent() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     phone: '',
-    password: ''
+    password: '',
   });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMessage('');
-
-    if (!formData.phone || !formData.password) {
-      alert('Iltimos, barcha maydonlarni to\'ldiring');
-      return;
-    }
-
-    try {
-      await fetch('YOUR_API_ENDPOINT_HERE', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          phone: formData.phone,
-          password: formData.password
-        }),
-      });
-      navigate('/adress');
-    } catch (error) {
-      setErrorMessage('Xato yuz berdi. Iltimos, keyinroq urinib ko‘ring.');
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const { phone, password } = formData;
+
+  if (!phone || !password) {
+    setError('Iltimos, telefon raqami va parolni kiriting.');
+    return;
+  }
+
+  try {
+    const response = await axios.post('/api/login', { phone, password });
+
+    if (response.status === 200) {
+      const user = response.data; 
+      localStorage.setItem('user', JSON.stringify(user));
+      navigate('/home');
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    setError('Loginda xato yuz berdi. Iltimos, qayta urinib ko‘ring.');
+  }
+};
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.card}>
           <h2 className={styles.title}>Assalomu alaykum, sizni qayta ko'rganimizdan xursandmiz!</h2>
         </div>
@@ -47,11 +52,10 @@ function LoginComponent() {
           <input
             type="number"
             name="phone"
-            placeholder="998"
+            placeholder="+998"
             className={styles.input}
             value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            maxLength={13}
+            onChange={handleChange}
           />
         </div>
         <div className={styles.inputGroup}>
@@ -62,20 +66,14 @@ function LoginComponent() {
             placeholder="Parolingizni kiriting"
             className={styles.input}
             value={formData.password}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-            maxLength={6}
+            onChange={handleChange}
           />
         </div>
-
-        {errorMessage && <div className={styles.error}>{errorMessage}</div>}
-
+        {error && <span className={styles.errorText}>{error}</span>}
         <div className={styles.box}>
           <span className={styles.span}>Akkauntingiz yo'qmi?</span>
-          <span className={styles.link} onClick={() => navigate('/sign')}>
-            Bu yerdan oching
-          </span>
+          <span className={styles.link} onClick={() => navigate('/sign')}> Bu yerdan oching </span>
         </div>
-
         <button type="submit" className={styles.submitButton}>Kirish</button>
       </form>
     </div>

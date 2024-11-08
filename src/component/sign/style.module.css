@@ -70,6 +70,13 @@
     font-family: "Roboto", sans-serif;
     margin-right: 10px;
   }
+  .errorText {
+    color: #ff4d4f; 
+    font-size: 14px; 
+    font-weight: bold; 
+    font-family: "Roboto", sans-serif;
+  }
+  
   
   .link {
     font-family: "Roboto", sans-serif;

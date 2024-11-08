@@ -5,6 +5,7 @@ import InformationPage from "../pages/information";
 import PricePage from "../pages/price";
 import LoginPage from "../pages/login";
 import SignPage from "../pages/sign";
+import HomePage from "../pages/home";
 
 function RouterComponent() {
   return (
@@ -13,6 +14,7 @@ function RouterComponent() {
       <Route path="/information" element={<InformationPage />} />
       <Route path="/price" element={<PricePage />} />
       <Route path="/" element={<LoginPage />} />
+      <Route path="/home" element={<HomePage/>}/>
       <Route path="/sign" element={<SignPage />} />
     </Routes>
   );

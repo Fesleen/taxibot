@@ -13,29 +13,36 @@ function SignComponent() {
     driverLicenseSeries: '',
   });
 
+  const [error, setError] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { name, surname, phone, passportSeries, driverLicenseSeries } = formData;
-    if (!name || !surname || !phone || !passportSeries || !driverLicenseSeries) {
-      alert('Iltimos, barcha maydonlarni to‘ldiring.');
-      return;
-    }
+  const { phone, password } = formData;
 
-    try {
-      const response = await axios.post('/api/register', formData);
-      if (response.status === 200) {
-        navigate('/adress');
-      }
-    } catch (error) {
-      console.error("Ro'yxatdan o'tishda xatolik:", error);
-      alert("Ro'yxatdan o'tishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.");
+  if (!phone || !password) {
+    setError(`Iltimos,hamma joyni to'ldiring!`);
+    return;
+  }
+
+  try {
+    const response = await axios.post('/api/sign', { phone, password });
+
+    if (response.status === 200) {
+      const user = response.data; 
+      localStorage.setItem('user', JSON.stringify(user));
+      navigate('/home');
     }
-  };
+  } catch (error) {
+    console.error('Login error:', error);
+    setError('Loginda xato yuz berdi. Iltimos, qayta urinib ko‘ring.');
+  }
+};
+
 
   return (
     <div className={styles.container}>
@@ -106,7 +113,7 @@ function SignComponent() {
             onChange={handleChange}
           />
         </div>
-
+        {error && <span className={styles.errorText}>{error}</span>}
         <button type="submit" className={styles.submitButton}>Ro'yxatdan o'tish</button>
       </form>
     </div>

@@ -27,11 +27,11 @@
   margin-bottom: 20px;
   font-family: "Roboto", sans-serif;
 }
+
 .inputGroup {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px; 
 }
 
 .label {
@@ -50,11 +50,10 @@
   border: 1px solid #fff;
   background-color: transparent;
   color: #fff;
-  margin-bottom: 25px;
 }
 
 .input:focus {
-  border-color: #00fff7; 
+  border-color: #00fff7;
 }
 
 
@@ -67,6 +66,8 @@
   color: #fff;
   font-family: "Roboto", sans-serif;
   margin-right: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 .link {
@@ -93,6 +94,7 @@
 .submitButton:hover {
   background-color: #007d79;
 }
+
 .box {
   display: flex;
   align-items: center;
@@ -110,6 +112,13 @@
   text-decoration: none;
   color: #00fff7;
   font-weight: bold;
+}
+
+.errorText {
+  color: #ff4d4f; 
+  font-size: 14px; 
+  font-weight: bold; 
+  font-family: "Roboto", sans-serif;
 }
 
 @media (max-width: 768px) {
