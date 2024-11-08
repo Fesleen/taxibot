@@ -45,7 +45,6 @@ function LoginComponent() {
         <div className={styles.card}>
           <h2 className={styles.title}>Assalomu alaykum, sizni qayta ko'rganimizdan xursandmiz!</h2>
         </div>
-
         <div className={styles.inputGroup}>
           <label className={styles.label}>Telefon raqamingiz</label>
           <input
@@ -58,7 +57,6 @@ function LoginComponent() {
             maxLength={13}
           />
         </div>
-
         <div className={styles.inputGroup}>
           <label className={styles.label}>Parolingiz</label>
           <input
