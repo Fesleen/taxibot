@@ -14,12 +14,14 @@ function LoginComponent() {
     e.preventDefault();
     setErrorMessage('');
 
+    // Ensure both fields are filled before sending data
     if (!formData.phone || !formData.password) {
       alert('Iltimos, barcha maydonlarni to\'ldiring');
       return;
     }
 
     try {
+      // Make the API request
       const response = await fetch('YOUR_API_ENDPOINT_HERE', {
         method: 'POST',
         headers: {
@@ -31,13 +33,17 @@ function LoginComponent() {
         }),
       });
 
+      // Use response to check for successful login
       if (response.ok) {
+        // If response is successful, navigate to the address page
         navigate('/address');
       } else {
-        setErrorMessage('Invalid credentials. Please try again.');
+        // If response is not successful, show an error message
+        setErrorMessage('Noto‘g‘ri ma’lumotlar. Iltimos, qayta urinib ko‘ring.');
       }
     } catch (error) {
-      setErrorMessage('An error occurred. Please try again later.');
+      // Handle error if fetch fails
+      setErrorMessage('Xato yuz berdi. Iltimos, keyinroq urinib ko‘ring.');
     }
   };
 
