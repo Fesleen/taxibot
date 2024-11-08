@@ -43,7 +43,7 @@ function SignComponent() {
         <h2 className={styles.title}>Ro'yxatdan o'tish</h2>
         <div className={styles.box}>
           <span className={styles.span}>Akkauntingiz bormi?</span>
-          <span className={styles.link} onClick={() => navigate('/login')}>
+          <span className={styles.link} onClick={() => navigate('/')}>
             Kirish
           </span>
         </div>
