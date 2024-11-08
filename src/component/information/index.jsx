@@ -1,58 +1,63 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styles from './style.module.css'
+import styles from './style.module.css';
 
 function InformationComponent() {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [gender, setGender] = useState('');
-  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    phoneNumber: '',
+    gender: ''
+  });
 
-  const handlePhoneNumberChange = (e) => {
-    let value = e.target.value;
-    if (value && !value.startsWith("998")) {
-      value = "+998" + value;
-    }
-    setPhoneNumber(value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!phoneNumber || !gender) {
-      setError("Iltimos, telefon raqami va jinsni to‘ldiring.");
-      return;
+
+    if (formData.phoneNumber && formData.gender) {
+      axios.post('API/information', formData)
+        .then(() => {
+          alert("Ma'lumotlar yuborildi!");
+          navigate('/dashboard');
+        })
+        .catch(() => alert("Xato yuz berdi."));
+    } else {
+      alert("Iltimos, barcha maydonlarni to'ldiring");
     }
-    axios.post('API/information', {
-      phoneNumber,
-      gender
-    }).then(() => alert(`Ma'lumotlar yuborildi!`))
-      .catch((error) => alert('Xato yuz berdi.'));
   };
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Telefon raqami:</label>
-          <input 
-            type="text" 
-            value={phoneNumber} 
-            onChange={handlePhoneNumberChange} 
-            placeholder="+998" 
+      <form className={styles.form} onSubmit={handleSubmit}>
+      <div className={styles.inputGroup}>
+          <label className={styles.label}>Telefon raqamingiz</label>
+          <input
+            type="text"
+            name="phone"
+            placeholder="998XXYYYYYYY"
             className={styles.input}
+            value={formData.phone}
+            onChange={handleChange}
           />
         </div>
-
         <div className={styles.inputGroup}>
           <label className={styles.label}>Jins:</label>
-          <select value={gender} onChange={(e) => setGender(e.target.value)} className={styles.select}>
+          <select
+            name="gender"
+            className={styles.select}
+            value={formData.gender}
+            onChange={handleChange}
+          >
             <option value="">Tanlang</option>
             <option value="male">Erkak</option>
             <option value="female">Ayol</option>
           </select>
         </div>
-
-        {error && <span className={styles.errorText}>{error}</span>}
-        <input type="submit" value="Yuborish" className={styles.submitButton} />
+        <button type="submit" className={styles.submitButton}>Yuborish</button>
       </form>
     </div>
   );

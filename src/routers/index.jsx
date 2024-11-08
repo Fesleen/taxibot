@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import AddressPage from "../pages/address";
 import InformationPage from "../pages/information";
 import PricePage from "../pages/price";
+import LoginPage from "../pages/login";
+import SignPage from "../pages/sign";
 
 
 
@@ -13,6 +15,8 @@ function RouterComponent() {
          <Route path={"/"} element={<AddressPage/>} />
          <Route path={"/information"} element={<InformationPage/>} />
          <Route path={"/price"} element={<PricePage/>} />
+         <Route path={"/login"} element={<LoginPage/>} />
+         <Route path={"/sign"} element={<SignPage/>}/>
       </Routes>
    )
 }

@@ -15,41 +15,8 @@ function AddressComponent() {
     "Toshkent": [
       "Bektemir", "Mirobod", "Mirzo Ulug'bek", "Sirg'ali", "Chilonzor", "Yakkasaroy", "Shayxontohur", "Yunusobod", "Olmazor"
     ],
-    "Andijon": [
-      "Andijon", "Asaka", "Baliqchi", "Bo'z", "Izboskan", "Jalaquduq", "Marhamat", "Khonaqa", "Shahrixon", "Ulug'nor"
-    ],
-    "Buxoro": [
-      "Buxoro", "Vobkent", "G'ijduvon", "Jondor", "Kogon", "Shofirkon", "Qorako'l", "Peshku", "Romitan", "Jumaniyoz"
-    ],
-    "Farg'ona": [
-      "Farg'ona", "Beshariq", "Bo'ston", "Dang'ara", "Furqat", "Kokand", "Mingbuloq", "Rishton", "Toshloq", "Uchko'prik"
-    ],
-    "Jizzax": [
-      "Jizzax", "Baxmal", "G'allaorol", "Zafarobod", "Sharof Rashidov", "Jumaobod", "Arnasoy", "Mingbuloq"
-    ],
-    "Qashqadaryo": [
-      "Qarshi", "Chirakchi", "Dehqonobod", "Kasbi", "Muborak", "Nishon", "Shahrisabz", "Kitob", "Qamashi", "Yakkabog'"
-    ],
-    "Khorezm": [
-      "Urgench", "Yangibozor", "Gurlan", "Khiva", "Shovot", "Tashovuz", "Khazarasp", "Beruniy"
-    ],
     "Samarqand": [
       "Samarqand", "Kattakurgan", "Jomboy", "Narpay", "Oqdarya", "Pastdargom", "Payariq", "Bulung'ur", "Tayloq"
-    ],
-    "Surxondaryo": [
-      "Termiz", "Angor", "Boysun", "Denov", "Jarqoq", "Kiziriq", "Muzrobod", "Sherobod", "Sariosiyo", "Uzun"
-    ],
-    "Navoiy": [
-      "Navoiy", "Zarafshan", "Uchkuduk", "Kyzyltepa", "Tomdi", "Konimex", "Nurota"
-    ],
-    "Sirdaryo": [
-      "Guliston", "Jizzakh", "Mirzaobod", "Sirdaryo", "Shirin", "Baydavlat", "Oqoltin"
-    ],
-    "Toshkent viloyati": [
-      "Angren", "Angren", "Bekabad", "Chirchiq", "Zangiota", "Quyi Chirchiq", "Yangiyo'l", "Kibray", "Bo'ka", "Toshkent", "Yangiobod"
-    ],
-    "Xorazm": [
-      "Urgench", "Yangibozor", "Gurlan", "Khiva", "Shovot", "Tashovuz", "Khazarasp", "Beruniy"
     ]
   };
   

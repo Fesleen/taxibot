@@ -1,8 +1,21 @@
+/* Reset margin, padding, and set box-sizing globally */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure the body doesn't allow horizontal overflow */
+body {
+  overflow-x: hidden;
+}
+
 .container {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box; /* Ensures padding is included in width */
 }
 
 .form {
@@ -21,6 +34,7 @@
   font-size: 18px;
   color: #fff;
   margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
 }
 
 .input, .select {
@@ -30,6 +44,7 @@
   border: 1px solid #fff;
   background-color: transparent;
   color: #fff;
+  font-family: "Roboto", sans-serif;
 }
 
 .errorText {
@@ -47,6 +62,7 @@
   border-radius: 5px;
   background-color: #008d88;
   color: white;
+  cursor: pointer;
 }
 
 .submitButton:hover {
@@ -63,7 +79,6 @@
     padding: 8px;
   }
 }
-
 
 @media (max-width: 480px) {
   .container {
