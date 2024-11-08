@@ -25,8 +25,11 @@ function LoginComponent() {
           password: formData.password
         }),
       });
-
-      navigate('/adress');
+      if (response.ok) {
+        navigate('/adress');
+      } else {
+        setErrorMessage('Invalid credentials. Please try again.');
+      }
     } catch (error) {
       setErrorMessage('An error occurred. Please try again later.');
     }
