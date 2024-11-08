@@ -1,15 +1,12 @@
+import React from 'react';
 import './App.css';
-import Layout from '../src/layout';
-import AddressPage from './pages/address';
+import Layout from './layout';
 import RouterComponent from './routers';
 
 function App() {
   return (
-    
     <Layout>
-      <RouterComponent>
-        <AddressPage/>
-      </RouterComponent>
+      <RouterComponent />
     </Layout>
   );
 }

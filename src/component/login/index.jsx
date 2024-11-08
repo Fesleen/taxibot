@@ -6,7 +6,7 @@ function LoginComponent() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     phone: '',
-    password: ''
+    password: '' // Corrected to use "password" for the state key
   });
 
   const handleChange = (e) => {
@@ -16,7 +16,6 @@ function LoginComponent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (formData.phone && formData.password) {
       navigate('/dashboard');
     } else {
@@ -44,8 +43,8 @@ function LoginComponent() {
         <div className={styles.inputGroup}>
           <label className={styles.label}>Parolingiz</label>
           <input
-            type="pasworrd"
-            name="surname"
+            type="password" // Corrected to "password" type
+            name="password" // Matches "password" state key
             placeholder="Parolingizni kiriting"
             className={styles.input}
             value={formData.password}
