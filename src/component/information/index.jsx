@@ -36,9 +36,9 @@ function InformationComponent() {
       <div className={styles.inputGroup}>
           <label className={styles.label}>Telefon raqamingiz</label>
           <input
-            type="text"
+            type="number"
             name="phone"
-            placeholder="998XXYYYYYYY"
+            placeholder="998"
             className={styles.input}
             value={formData.phone}
             onChange={handleChange}
