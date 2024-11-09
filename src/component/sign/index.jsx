@@ -81,7 +81,7 @@ function SignComponent() {
         <div className={styles.inputGroup}>
           <label className={styles.label}>Telefon raqamingiz</label>
           <input
-            type="tel"
+            type="number"
             name="phone"
             placeholder="998XXYYYYYYY"
             className={styles.input}
