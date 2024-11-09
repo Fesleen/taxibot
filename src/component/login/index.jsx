@@ -5,7 +5,7 @@ import styles from './style.module.css';
 
 function LoginComponent() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ phone: '', password: '' });
+  const [formData, setFormData] = useState({ phone_number: '', password: '' });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,19 +16,19 @@ function LoginComponent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { phone, password } = formData;
+    const { phone_number, password } = formData;
 
-    if (!phone || !password) {
+    if (!phone_number || !password) {
       setError('Iltimos, telefon raqami va parolni kiriting.');
       return;
     }
 
-    setIsLoading(true); 
+    setIsLoading(true);
 
     try {
       const response = await axios.post(
-        'api/login/',
-        { phone, password }
+        'https://samarqandtaksi.pythonanywhere.com/users/login/',
+        { phone_number, password }
       );
 
       if (response.status === 200) {
@@ -40,8 +40,12 @@ function LoginComponent() {
       console.error('Login error:', error);
       setError('Loginda xato yuz berdi. Iltimos, qayta urinib ko‘ring.');
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
+  };
+
+  const goToSignUp = () => {
+    navigate('/sign'); 
   };
 
   return (
@@ -54,15 +58,15 @@ function LoginComponent() {
         <div className={styles.inputGroup}>
           <label className={styles.label}>Telefon raqamingiz</label>
           <input
-            type="tel"
-            name="phone"
+            type="number"
+            name="phone_number"
             placeholder="+998"
             className={styles.input}
-            value={formData.phone}
+            value={formData.phone_number}
             onChange={handleChange}
           />
         </div>
-        
+
         <div className={styles.inputGroup}>
           <label className={styles.label}>Parolingiz</label>
           <input
@@ -76,9 +80,14 @@ function LoginComponent() {
         </div>
 
         {error && <span className={styles.errorText}>{error}</span>}
-
+        <div className={styles.box}>
+          <span className={styles.span}>Akkauntingiz yo'qmi?</span>
+          <span className={styles.link} onClick={goToSignUp}>
+            Ro'yxatdan o'tish
+          </span>
+        </div>
         {isLoading ? (
-          <span className={styles.span}>Yuklanmoqda...</span> 
+          <span>Yuklanmoqda...</span>
         ) : (
           <button type="submit" className={styles.submitButton}>
             Kirish
