@@ -19,30 +19,31 @@ function SignComponent() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-const handleSubmit = async (e) => {
-  e.preventDefault();
 
-  const { phone, password } = formData;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (!phone || !password) {
-    setError(`Iltimos,hamma joyni to'ldiring!`);
-    return;
-  }
-
-  try {
-    const response = await axios.post('/api/sign', { phone, password });
-
-    if (response.status === 200) {
-      const user = response.data; 
-      localStorage.setItem('user', JSON.stringify(user));
-      navigate('/home');
+    // Barcha maydonlarni to'ldirilganligini tekshirish
+    const { name, surname, phone, passportSeries, driverLicenseSeries } = formData;
+    if (!name || !surname || !phone || !passportSeries || !driverLicenseSeries) {
+      setError("Iltimos, hamma joyni to'ldiring!");
+      return;
     }
-  } catch (error) {
-    console.error('Login error:', error);
-    setError('Loginda xato yuz berdi. Iltimos, qayta urinib ko‘ring.');
-  }
-};
 
+    try {
+      // Barcha form ma'lumotlarini APIga yuborish
+      const response = await axios.post('/api/sign', formData);
+
+      if (response.status === 200) {
+        const user = response.data;
+        localStorage.setItem('user', JSON.stringify(user));
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Sign-up error:', error);
+      setError('Ro‘yxatdan o‘tishda xato yuz berdi. Iltimos, qayta urinib ko‘ring.');
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -50,10 +51,9 @@ const handleSubmit = async (e) => {
         <h2 className={styles.title}>Ro'yxatdan o'tish</h2>
         <div className={styles.box}>
           <span className={styles.span}>Akkauntingiz bormi?</span>
-          <span className={styles.link} onClick={() => navigate('/')}>
-            Kirish
-          </span>
+          <span className={styles.link} onClick={() => navigate('/')}>Kirish</span>
         </div>
+
         <div className={styles.inputGroup}>
           <label className={styles.label}>Ismingiz</label>
           <input
@@ -81,7 +81,7 @@ const handleSubmit = async (e) => {
         <div className={styles.inputGroup}>
           <label className={styles.label}>Telefon raqamingiz</label>
           <input
-            type="number"
+            type="tel"
             name="phone"
             placeholder="998XXYYYYYYY"
             className={styles.input}
@@ -113,7 +113,9 @@ const handleSubmit = async (e) => {
             onChange={handleChange}
           />
         </div>
+
         {error && <span className={styles.errorText}>{error}</span>}
+
         <button type="submit" className={styles.submitButton}>Ro'yxatdan o'tish</button>
       </form>
     </div>

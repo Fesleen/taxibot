@@ -10,42 +10,53 @@ function LoginComponent() {
     password: '',
   });
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { phone, password } = formData;
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  const { phone, password } = formData;
-
-  if (!phone || !password) {
-    setError('Iltimos, telefon raqami va parolni kiriting.');
-    return;
-  }
-
-  try {
-    const response = await axios.post('/api/login', { phone, password });
-
-    if (response.status === 200) {
-      const user = response.data; 
-      localStorage.setItem('user', JSON.stringify(user));
-      navigate('/home');
+    if (!phone || !password) {
+      setError('Iltimos, telefon raqami va parolni kiriting.');
+      return;
     }
-  } catch (error) {
-    console.error('Login error:', error);
-    setError('Loginda xato yuz berdi. Iltimos, qayta urinib ko‘ring.');
-  }
-};
+
+    setIsLoading(true); // Yuklanmoqda indikatorini o'rnatish
+    setError(''); // Xatolikni tozalash
+
+    try {
+      const response = await axios.post('/api/login', { phone, password });
+
+      if (response.status === 200) {
+        const user = response.data;
+        localStorage.setItem('user', JSON.stringify(user));
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+
+      if (error.response && error.response.status === 401) {
+        setError('Telefon raqami yoki parol noto‘g‘ri.');
+      } else {
+        setError('Loginda xato yuz berdi. Iltimos, qayta urinib ko‘ring.');
+      }
+    } finally {
+      setIsLoading(false); // Yuklanish holatini o'chirish
+    }
+  };
 
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.card}>
-          <h2 className={styles.title}>Assalomu alaykum, sizni qayta ko'rganimizdan xursandmiz!</h2>
+          <h2 className={styles.title}>
+            Assalomu alaykum, sizni qayta ko'rganimizdan xursandmiz!
+          </h2>
         </div>
         <div className={styles.inputGroup}>
           <label className={styles.label}>Telefon raqamingiz</label>
@@ -61,7 +72,7 @@ const handleSubmit = async (e) => {
         <div className={styles.inputGroup}>
           <label className={styles.label}>Parolingiz</label>
           <input
-            type="number"
+            type="password"
             name="password"
             placeholder="Parolingizni kiriting"
             className={styles.input}
@@ -70,11 +81,17 @@ const handleSubmit = async (e) => {
           />
         </div>
         {error && <span className={styles.errorText}>{error}</span>}
+        {isLoading && <span className={styles.loadingText}>Yuklanmoqda...</span>}
         <div className={styles.box}>
           <span className={styles.span}>Akkauntingiz yo'qmi?</span>
-          <span className={styles.link} onClick={() => navigate('/sign')}> Bu yerdan oching </span>
+          <span className={styles.link} onClick={() => navigate('/sign')}>
+            {' '}
+            Bu yerdan oching{' '}
+          </span>
         </div>
-        <button type="submit" className={styles.submitButton}>Kirish</button>
+        <button type="submit" className={styles.submitButton} disabled={isLoading}>
+          {isLoading ? 'Kirish...' : 'Kirish'}
+        </button>
       </form>
     </div>
   );
