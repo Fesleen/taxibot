@@ -15,7 +15,7 @@ function HomeComponent() {
 
   const handleSubmit = () => {
     navigate('/adress');
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -25,7 +25,7 @@ function HomeComponent() {
             <span>Welcome, {user.name}!</span>
           </div>
           <div>
-            <span>Balance: {user.balance} UZS</span>
+            <span>Balance: {user.balance.toLocaleString()} UZS</span>
           </div>
         </header>
       ) : (
